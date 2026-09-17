@@ -11,6 +11,11 @@ resource "azurerm_key_vault" "kv" {
     default_action = "Deny"
     bypass         = "AzureServices"
   }
+
+  tags = {
+    environment = var.environment
+    managed_by  = "terraform"
+  }
 }
 
 # Storage Account

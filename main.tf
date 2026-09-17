@@ -26,6 +26,11 @@ resource "azurerm_resource_group" "hub_rg" {
   name     = var.hub_resource_group_name
   location = var.location
 
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
+  }
+
   lifecycle {
     prevent_destroy = true
   }
@@ -51,6 +56,11 @@ resource "azurerm_resource_group" "spoke_rg" {
   for_each = var.spokes
   name     = "rg-spoke-${each.key}"
   location = var.location
+
+  tags = {
+    environment = each.key
+    managed_by  = "terraform"
+  }
 }
 
 # Spoke Networks
