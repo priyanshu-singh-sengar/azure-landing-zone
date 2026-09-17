@@ -98,8 +98,8 @@ module "data_secrets" {
   environment          = each.key
   resource_group_name  = azurerm_resource_group.spoke_rg[each.key].name
   location             = var.location
-  key_vault_name       = "kv-lz-${each.key}-${substr(md5(each.key), 0, 6)}"
-  storage_account_name = "stlz${each.key}${substr(md5(each.key), 0, 6)}"
+  key_vault_name       = "kv-ps-${each.key}-${substr(md5(each.key), 0, 6)}"
+  storage_account_name = "stlzps${each.key}${substr(md5(each.key), 0, 6)}"
   tenant_id            = var.tenant_id
 }
 
