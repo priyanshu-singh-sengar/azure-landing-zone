@@ -4,6 +4,11 @@ resource "azurerm_virtual_network" "spoke" {
   location            = var.location
   resource_group_name = var.resource_group_name
   address_space       = var.vnet_address_space
+
+  tags = {
+    environment = var.environment
+    managed_by  = "terraform"
+  }
 }
 
 # Route Table — forces spoke traffic through the hub firewall (only created if create_route_table is true)
@@ -18,6 +23,11 @@ resource "azurerm_route_table" "spoke" {
     address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = var.firewall_private_ip
+  }
+
+  tags = {
+    environment = var.environment
+    managed_by  = "terraform"
   }
 }
 
@@ -36,6 +46,11 @@ resource "azurerm_network_security_group" "nsg" {
   name                = "nsg-${var.environment}-${each.key}"
   location            = var.location
   resource_group_name = var.resource_group_name
+
+  tags = {
+    environment = var.environment
+    managed_by  = "terraform"
+  }
 
   dynamic "security_rule" {
     for_each = each.value.nsg_rules

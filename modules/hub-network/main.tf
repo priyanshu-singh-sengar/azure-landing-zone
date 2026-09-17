@@ -4,6 +4,11 @@ resource "azurerm_virtual_network" "hub" {
   location            = var.location
   resource_group_name = var.resource_group_name
   address_space       = var.hub_address_space
+
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
+  }
 }
 
 # Firewall Subnet — name is fixed by Azure, cannot be renamed
@@ -41,6 +46,11 @@ resource "azurerm_public_ip" "firewall" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
   sku                 = "Standard"
+
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
+  }
 }
 
 # Azure Firewall
@@ -57,6 +67,11 @@ resource "azurerm_firewall" "hub" {
     subnet_id            = azurerm_subnet.firewall[0].id
     public_ip_address_id = azurerm_public_ip.firewall[0].id
   }
+
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
+  }
 }
 
 # Firewall Policy — spokes reference this to add rules
@@ -65,6 +80,11 @@ resource "azurerm_firewall_policy" "hub" {
   name                = "fwpolicy-${var.hub_vnet_name}"
   resource_group_name = var.resource_group_name
   location            = var.location
+
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
+  }
 }
 
 # Public IP for Bastion
@@ -75,6 +95,11 @@ resource "azurerm_public_ip" "bastion" {
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
   sku                 = "Standard"
+
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
+  }
 }
 
 # Azure Bastion Host
@@ -89,5 +114,10 @@ resource "azurerm_bastion_host" "hub" {
     name                 = "bastion-ipconfig"
     subnet_id            = azurerm_subnet.bastion[0].id
     public_ip_address_id = azurerm_public_ip.bastion[0].id
+  }
+
+  tags = {
+    environment = "hub"
+    managed_by  = "terraform"
   }
 }
