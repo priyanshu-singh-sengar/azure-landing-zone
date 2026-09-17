@@ -20,6 +20,7 @@ resource "azurerm_storage_account" "sa" {
   location                 = var.location
   account_tier             = var.storage_account_tier
   account_replication_type = var.storage_replication_type
+  min_tls_version          = "TLS1_2"
 
   tags = {
     environment = var.environment
