@@ -9,6 +9,7 @@ resource "azurerm_service_plan" "asp" {
 
   tags = {
     environment = var.environment
+    managed_by  = "terraform"
   }
 }
 
@@ -21,8 +22,10 @@ resource "azurerm_linux_web_app" "app" {
 
   site_config {}
 
+  # Application tags
   tags = {
     environment = var.environment
+    managed_by  = "terraform"
   }
 }
 
