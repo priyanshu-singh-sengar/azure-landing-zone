@@ -25,6 +25,7 @@ resource "azurerm_linux_web_app" "app" {
   # Application tags
   tags = {
     environment = var.environment
+    managed_by  = "terraform"
   }
 }
 
