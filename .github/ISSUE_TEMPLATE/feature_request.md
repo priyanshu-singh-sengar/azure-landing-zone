@@ -1,29 +1,35 @@
-﻿---
+---
 name: Infrastructure Change Request
 about: Propose a change to the Terraform landing zone
-title: "[LZ] "
+title: '[LZ] '
 labels: infrastructure
 ---
 
 ## Summary
-
-<!-- One sentence describing the infrastructure change -->
+<!-- Provide a clear, one-sentence description of the proposed infrastructure change -->
 
 ## Component(s) Affected
-
-<!-- e.g. hub-network, spoke-network, data-secrets, observability, identity, governance -->
-
-## Acceptance Criteria
-
-<!-- Bullet list of what "done" looks like for this change -->
-- [ ]
-- [ ]
-- [ ]
+- [ ] `hub-network` (Hub VNet, Azure Firewall, Bastion, Gateway)
+- [ ] `spoke-network` (Spoke VNets, Subnets, Route Tables, NSGs)
+- [ ] `spoke-peering` (Hub-Spoke VNet Peerings)
+- [ ] `data-secrets` (Key Vault, Storage Accounts)
+- [ ] `observability` (Log Analytics, Diagnostic Settings)
+- [ ] `identity` (User-Assigned Managed Identity, RBAC)
+- [ ] `governance` (Azure Policies, Policy Assignments)
+- [ ] `workload` (App Service Plans, Web Apps)
 
 ## Environment(s)
+- [ ] `dev`
+- [ ] `test`
+- [ ] `prod`
+- [ ] `hub`
 
-<!-- dev / test / prod / hub — which environment(s) does this affect -->
+## Acceptance Criteria
+<!-- Bullet list specifying definition of done and test criteria -->
+- [ ] Terraform configuration passes local `fmt` and `validate`
+- [ ] Security scan passes with zero high/critical vulnerabilities
+- [ ] `terraform plan` produces expected speculative diff
+- [ ] All resources adhere to required tags (`environment`, `managed_by`)
 
-## Notes / Context
-
-<!-- Any additional context, links to architecture docs, or related issues -->
+## Additional Context / Architecture Notes
+<!-- Attach relevant architectural diagrams, design decisions, or references -->
